@@ -7,7 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.main.modal.Departments;
+import com.example.main.entity.Departments;
+import com.example.main.entity.Employee;
 import com.example.main.repo.DepartmentRepo;
 
 @Service
@@ -37,17 +38,22 @@ public class DepartmentService {
 
 	public ResponseEntity<List<Departments>> addDepartment(Departments dept, String auth) {
 		try {
-			
+			List<Departments> departments ;
+			if(deptRepo.existsById(dept.getDepartmentNumber())) {
+	            return new ResponseEntity<>(HttpStatus.CONFLICT);
+			} else {
+//				deptRepo.addDepartment(dept.getDepartmentName(), dept.getDepartmentNumber(),dept.getManagerSSN(), dept.getManagerStartDate());
+//				for(Employee emp:dept.getEmployee()) {
+//					
+//				}
+				deptRepo.save(dept);
+				departments=deptRepo.findAll();
+				return new ResponseEntity<>(departments, HttpStatus.OK);
+			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
-		List<Departments> departments = deptRepo.findAll();
-		if(deptRepo.existsById(dept.getDepartmentNumber())) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-		} else {
-			deptRepo.addDepartment(dept.getDepartmentNumber(), dept.getDepartmentName(), dept.getManagerSSN(), dept.getManagerStartDate());
-			return new ResponseEntity<>(departments, HttpStatus.OK);
-		}
+
 	}
 	
 	public List<Departments> updateDepartment(Departments dept) {
@@ -64,5 +70,8 @@ public class DepartmentService {
 		return deptRepo.findAll();
 	}
 	
+	public  List<Departments> findDepartmentsManagedBySsn(int ssn){
+		return deptRepo.findByManagerOfDeptSsn(ssn);
+	}
 	
 }

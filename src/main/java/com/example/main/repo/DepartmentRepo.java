@@ -1,27 +1,26 @@
 package com.example.main.repo;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.data.jdbc.repository.query.Modifying;
-import org.springframework.data.jdbc.repository.query.Query;
-import org.springframework.data.repository.ListCrudRepository;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.example.main.modal.Departments;
+import com.example.main.entity.Departments;
+import com.example.main.entity.Employee;
 
 @Repository
-public interface DepartmentRepo extends ListCrudRepository<Departments, Integer>{
+public interface DepartmentRepo extends JpaRepository<Departments, Integer>{
 	
 	public List<Departments> findByDepartmentName(String dname);
-	@Modifying
-	@Transactional
-    @Query("insert into Departments(Dname, Dnum, MGRSSN, [MGRStart Date]) values(:Dname , :Dnum , :MGRSSN , :MGRStartDate)")
-    public void addDepartment(@Param("Dnum") Integer Dnum, @Param("Dname") String Dname, @Param("MGRSSN") Integer MGRSSN, @Param("MGRStartDate") LocalDateTime MGRStartDate);
-    
-    
+//	@Modifying
+//	@Query("INSERT INTO Department (dname, capacity, employees, createdAt) VALUES (:dname, :capacity, :employees, :createdAt)")
+//	@Transactional
+//	void addDepartment(@Param("dname") String dname,
+//	                   @Param("capacity") Integer capacity,
+//	                   @Param("employees") Integer employees,
+//	                   @Param("createdAt") LocalDateTime createdAt);
 	
+	public  List<Departments> findByManagerOfDeptSsn(int ssn);
 
 }

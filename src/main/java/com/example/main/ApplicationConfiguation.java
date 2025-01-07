@@ -15,7 +15,7 @@ public class ApplicationConfiguation {
 		return new Orders(15);
 	}
 	@Bean
-	@Profile("dev")
+//	@Profile("dev")
 	@Qualifier("secondOrder")
 	public Orders ordersTwo() {
 		return new Orders();
