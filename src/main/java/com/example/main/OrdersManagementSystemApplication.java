@@ -4,7 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.example.main.controller.EmployeeController;
+import com.example.main.controller.employee.EmployeeController;
+import com.example.main.testfeathers.Department;
 
 //import com.example.Orders;
 @SpringBootApplication
