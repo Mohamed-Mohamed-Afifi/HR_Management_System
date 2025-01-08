@@ -1,7 +1,6 @@
 package com.example.main.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,21 +8,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
-
-//public record Project(
-//		@Id
-//		@Column(name="Pnumber")
-//		Integer projectNumber,
-//		@Column(name="Pname")
-//		String projectName,
-//		@Column(name="Plocation")
-//		String projectLocation,
-//		@Column(name="Dnum")
-//		Integer departmentNumber,
-//		@Column(name="City")
-//		String city
-//		) {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="Project")
 public class Project{
@@ -35,14 +27,13 @@ public class Project{
 	private String projectName;
 	@Column(name="Plocation")
 	private String projectLocation;
-//	@Column(name="Dnum")
-//	private Integer departmentNumber;
 	@Column(name="City")
 	private String city;
 	@ManyToOne
 	@JoinColumn(name="Dnum")
 	@JsonBackReference
 	private Departments department;
+
 	public Integer getProjectNumber() {
 		return projectNumber;
 	}

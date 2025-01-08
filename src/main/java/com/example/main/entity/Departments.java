@@ -10,10 +10,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Table(name="Departments")
@@ -30,14 +31,14 @@ public class Departments {
 	@JsonProperty("managerStartDate")
 	private LocalDateTime managerStartDate;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="MGRSSN" ,referencedColumnName = " SSN ")
 	private Employee managerOfDept;
 	
 	@OneToMany(mappedBy="department")
 	@JsonManagedReference
 	private List<Project> project;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "department")
 	@JsonManagedReference
 	private List<Employee> employee;

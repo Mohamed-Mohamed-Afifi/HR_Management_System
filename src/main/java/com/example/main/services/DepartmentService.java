@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.main.entity.Departments;
-import com.example.main.entity.Employee;
 import com.example.main.repo.DepartmentRepo;
 
 @Service
@@ -43,9 +42,6 @@ public class DepartmentService {
 	            return new ResponseEntity<>(HttpStatus.CONFLICT);
 			} else {
 //				deptRepo.addDepartment(dept.getDepartmentName(), dept.getDepartmentNumber(),dept.getManagerSSN(), dept.getManagerStartDate());
-//				for(Employee emp:dept.getEmployee()) {
-//					
-//				}
 				deptRepo.save(dept);
 				departments=deptRepo.findAll();
 				return new ResponseEntity<>(departments, HttpStatus.OK);
