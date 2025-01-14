@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: hr_system
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=Final_SD;encrypt=true;trustServerCertificate=true
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    password: mos123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+    show-sql: true
+  logging:
+    level:
+      org:
+        hibernate:
+          SQL: DEBUG
+
+my:
+  app:
+    deptName: it
+    deptNum: 20
