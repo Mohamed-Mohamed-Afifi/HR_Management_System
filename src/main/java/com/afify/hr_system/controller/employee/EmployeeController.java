@@ -3,6 +3,8 @@ package com.afify.hr_system.controller.employee;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,19 +24,19 @@ public class EmployeeController {
 	private EmployeeService empService;
 	
 	@GetMapping("")
-	public List<Employee> getAll(){
-		return empService.getAllEmps();
+	public Page<Employee> getAll(@RequestBody PageInfo page){
+		return empService.getAllEmps(page);
 	}
 	@PostMapping("")
-	public List<Employee> addEmp(@RequestBody Employee emp){
+	public ResponseEntity<?>  addEmp(@RequestBody Employee emp){
 		return empService.addEmp(emp);
 	}
 	@DeleteMapping("/{id}")
-	public List<Employee> deleteEmp(@PathVariable int id){
+	public ResponseEntity<?> deleteEmp(@PathVariable int id){
 		return empService.deleteById(id);
 	}
 	@PutMapping("")
-	public List<Employee> udpateEmp(@RequestBody Employee emp){
+	public ResponseEntity<?>  udpateEmp(@RequestBody Employee emp){
 		return empService.updateEmp(emp);
 	}
 }

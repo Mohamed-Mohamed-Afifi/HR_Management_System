@@ -3,6 +3,7 @@ package com.afify.hr_system.service.department;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.afify.hr_system.model.department.Department;
@@ -27,18 +28,18 @@ public class DepartmentService {
 		return deptRepo.findAll();
 	}
 	
-	public List<Department> addDept(Department dept){
+	public ResponseEntity<?> addDept(Department dept){
 		deptRepo.save(dept);
-		return deptRepo.findAll();
+		return ResponseEntity.ok(null);
 	} 
 	
-	public List<Department> update(Department dept){
+	public ResponseEntity<?> update(Department dept){
 		deptRepo.save(dept);
-		return deptRepo.findAll();
+		return ResponseEntity.ok(null);
 	} 
 	
 	@Transactional
-	public List<Department> deleteById(int id){
+	public ResponseEntity<?> deleteById(int id){
 		List<Employee> employees=empRepo.findByDepartmentDepartmentNumber(id);
 		employees.forEach(emp->{
 			emp.setDepartment(null);
@@ -51,6 +52,6 @@ public class DepartmentService {
 		});
 		prjRepo.saveAll(projects);
 		deptRepo.deleteById(id);
-		return deptRepo.findAll();
+		return ResponseEntity.ok(null);
 	} 
 }

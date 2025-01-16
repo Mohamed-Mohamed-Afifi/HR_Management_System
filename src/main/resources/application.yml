@@ -1,4 +1,7 @@
 spring:
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
   application:
     name: hr_system
   datasource:

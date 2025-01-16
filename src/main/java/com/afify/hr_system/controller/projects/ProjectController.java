@@ -3,6 +3,7 @@ package com.afify.hr_system.controller.projects;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,15 +26,15 @@ public class ProjectController {
 		return prjService.getAllProjects();
 	}
 	@PostMapping("")
-	public List<Project> addEmp(@RequestBody Project prj){
+	public ResponseEntity<?> addEmp(@RequestBody Project prj){
 		return prjService.addProject(prj);
 	}
 	@DeleteMapping("/{id}")
-	public List<Project> deleteEmp(@PathVariable int id){
+	public ResponseEntity<?>  deleteEmp(@PathVariable int id){
 		return prjService.deleteById(id);
 	}
 	@PutMapping("")
-	public List<Project> udpateEmp(@RequestBody Project prj){
+	public ResponseEntity<?>  udpateEmp(@RequestBody Project prj){
 		return prjService.update(prj);
 	}
 }

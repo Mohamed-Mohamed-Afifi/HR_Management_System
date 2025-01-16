@@ -1,15 +1,18 @@
 package com.afify.hr_system.model.department;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
+
+import org.hibernate.annotations.Formula;
 
 import com.afify.hr_system.model.employee.Employee;
 import com.afify.hr_system.model.projects.Project;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -37,73 +40,90 @@ public class Department {
 	
 	@Column(name="MGRStart Date")
 	private LocalDateTime mgsStartDate;
-	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JsonManagedReference
+	@Formula(value = "(select count(*) from employee emp where emp.dno = dnum)")
+	private int numOfEmp;
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name="MGRSSN")
 	private Employee supervisor;
 	
 	@OneToMany(mappedBy = "department")
-	@JsonManagedReference
-	private List<Employee> employees;
+	@JsonIgnore
+	private Set<Employee> employees;
 	
 	
 	@OneToMany(mappedBy = "department")
-	@JsonManagedReference
-	private List<Project> projects;
+	@JsonIgnore
+	private Set<Project> projects;
 
-	public int getDepartmentNumber() {
-		return departmentNumber;
-	}
-
-	public void setDepartmentNumber(int departmentNumber) {
-		this.departmentNumber = departmentNumber;
-	}
-
-	public String getDname() {
-		return dname;
-	}
-
-	public void setDname(String dname) {
-		this.dname = dname;
-	}
-
-	public LocalDateTime getMgsStartDate() {
-		return mgsStartDate;
-	}
-
-	public void setMgsStartDate(LocalDateTime mgsStartDate) {
-		this.mgsStartDate = mgsStartDate;
-	}
-
-	public Employee getSupervisor() {
-		return supervisor;
-	}
-
-	public void setSupervisor(Employee supervisor) {
-		this.supervisor = supervisor;
-	}
-
-	public List<Project> getProjects() {
-		return projects;
-	}
-
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
-	}
-
-	public Department(int departmentNumber, String dname, LocalDateTime mgsStartDate, Employee supervisor,
-			List<Project> projects) {
-		super();
-		this.departmentNumber = departmentNumber;
-		this.dname = dname;
-		this.mgsStartDate = mgsStartDate;
-		this.supervisor = supervisor;
-		this.projects = projects;
-	}
-
-	public Department() {
-		super();
-	}
+//	public int getDepartmentNumber() {
+//		return departmentNumber;
+//	}
+//
+//	public void setDepartmentNumber(int departmentNumber) {
+//		this.departmentNumber = departmentNumber;
+//	}
+//
+//	public String getDname() {
+//		return dname;
+//	}
+//
+//	public void setDname(String dname) {
+//		this.dname = dname;
+//	}
+//
+//	public LocalDateTime getMgsStartDate() {
+//		return mgsStartDate;
+//	}
+//
+//	public void setMgsStartDate(LocalDateTime mgsStartDate) {
+//		this.mgsStartDate = mgsStartDate;
+//	}
+//
+//	public Employee getSupervisor() {
+//		return supervisor;
+//	}
+//
+//	public void setSupervisor(Employee supervisor) {
+//		this.supervisor = supervisor;
+//	}
+//
+//	public Set<Project> getProjects() {
+//		return projects;
+//	}
+//
+//	public void setProjects(Set<Project> projects) {
+//		this.projects = projects;
+//	}
+//	
+//
+//	public int getNumOfEmp() {
+//		return numOfEmp;
+//	}
+//
+//	public void setNumOfEmp(int numOfEmp) {
+//		this.numOfEmp = numOfEmp;
+//	}
+//
+//	public Set<Employee> getEmployees() {
+//		return employees;
+//	}
+//
+//	public void setEmployees(Set<Employee> employees) {
+//		this.employees = employees;
+//	}
+//
+//	public Department(int departmentNumber, String dname, LocalDateTime mgsStartDate, Employee supervisor,
+//			Set<Project> projects) {
+//		super();
+//		this.departmentNumber = departmentNumber;
+//		this.dname = dname;
+//		this.mgsStartDate = mgsStartDate;
+//		this.supervisor = supervisor;
+//		this.projects = projects;
+//	}
+//
+//	public Department() {
+//		super();
+//	}
 	
 }

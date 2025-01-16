@@ -3,6 +3,7 @@ package com.afify.hr_system.service.dependent;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.afify.hr_system.model.dependent.Dependent;
@@ -18,18 +19,18 @@ public class DependentService {
 		return dependentRepo.findAll();
 	}
 	
-	public List<Dependent> addDependent(Dependent dept){
+	public ResponseEntity<?> addDependent(Dependent dept){
 		dependentRepo.save(dept);
-		return dependentRepo.findAll();
+		return ResponseEntity.ok(null);
 	} 
 	
-	public List<Dependent> update(Dependent dept){
+	public ResponseEntity<?> update(Dependent dept){
 		dependentRepo.save(dept);
-		return dependentRepo.findAll();
+		return ResponseEntity.ok(null);
 	} 
 	
-	public List<Dependent> deleteById(DependentPrimaryKey id){
+	public ResponseEntity<?> deleteById(DependentPrimaryKey id){
 		dependentRepo.deleteById(id);
-		return dependentRepo.findAll();
+		return ResponseEntity.ok(null);
 	} 
 }

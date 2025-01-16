@@ -3,6 +3,7 @@ package com.afify.hr_system.controller.department;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,15 +26,15 @@ public class DepartmentController {
 		return deptService.getAlldepts();
 	}
 	@PostMapping("")
-	public List<Department> addEmp(@RequestBody Department dept){
+	public ResponseEntity<?>  addEmp(@RequestBody Department dept){
 		return deptService.addDept(dept);
 	}
 	@DeleteMapping("/{id}")
-	public List<Department> deleteEmp(@PathVariable int id){
+	public ResponseEntity<?>  deleteEmp(@PathVariable int id){
 		return deptService.deleteById(id);
 	}
 	@PutMapping("")
-	public List<Department> udpateEmp(@RequestBody Department dept){
+	public ResponseEntity<?> udpateEmp(@RequestBody Department dept){
 		return deptService.update(dept);
 	}
 }

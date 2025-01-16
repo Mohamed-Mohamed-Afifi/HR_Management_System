@@ -3,6 +3,7 @@ package com.afify.hr_system.controller.dependent;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,15 +27,15 @@ public class DependentController {
 		return deService.getAlldependents();
 	}
 	@PostMapping("")
-	public List<Dependent> addEmp(@RequestBody Dependent dep){
+	public ResponseEntity<?> addEmp(@RequestBody Dependent dep){
 		return deService.addDependent(dep);
 	}
-	@DeleteMapping("/{id}")
-	public List<Dependent> deleteEmp(@PathVariable DependentPrimaryKey id){
+	@DeleteMapping("")
+	public ResponseEntity<?>  deleteEmp(@RequestBody DependentPrimaryKey id){
 		return deService.deleteById(id);
 	}
 	@PutMapping("")
-	public List<Dependent> udpateEmp(@RequestBody Dependent dep){
+	public ResponseEntity<?>  udpateEmp(@RequestBody Dependent dep){
 		return deService.update(dep);
 	}
 }

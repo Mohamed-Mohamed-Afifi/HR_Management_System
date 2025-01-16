@@ -3,8 +3,13 @@ package com.afify.hr_system.service.employee;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.afify.hr_system.controller.employee.PageInfo;
 import com.afify.hr_system.model.employee.Employee;
 import com.afify.hr_system.repo.dependent.DependentRepo;
 import com.afify.hr_system.repo.employee.EmployeeRepo;
@@ -20,21 +25,23 @@ public class EmployeeService {
 	@Autowired
 	private PrjEmpRepo prjEmpRepo;
 	
-	public List<Employee> getAllEmps(){
-		return empRepo.findAll();
+	public Page<Employee> getAllEmps(PageInfo pageInfo){
+		Pageable pageable=PageRequest.of(pageInfo.getPageNum()-1,pageInfo.getPageSize());
+		return empRepo.findAll(pageable);
 	}
 	
-	public List<Employee> addEmp(Employee emp){
+	public ResponseEntity<?> addEmp(Employee emp){
 		empRepo.save(emp);
-		return empRepo.findAll();
+		
+		return ResponseEntity.ok(null);
 	} 
 	
-	public List<Employee> updateEmp(Employee emp){
+	public ResponseEntity<?> updateEmp(Employee emp){
 		empRepo.save(emp);
-		return empRepo.findAll();
+		return ResponseEntity.ok(null);
 	} 
 	@Transactional
-	public List<Employee> deleteById(int id){
+	public ResponseEntity<?> deleteById(int id){
 		List<Employee> employees=empRepo.findByManagerSsn(id);
 		employees.forEach(emp->{
 			emp.setManager(null);
@@ -44,6 +51,6 @@ public class EmployeeService {
 		prjEmpRepo.deleteByEmpSsn(id);
 		
 		empRepo.deleteById(id);
-		return empRepo.findAll();
+		return ResponseEntity.ok(null);
 	} 
 }

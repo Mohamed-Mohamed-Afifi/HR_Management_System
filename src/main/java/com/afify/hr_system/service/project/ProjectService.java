@@ -3,6 +3,7 @@ package com.afify.hr_system.service.project;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.afify.hr_system.model.projects.Project;
@@ -21,19 +22,19 @@ public class ProjectService {
 		return projectRepo.findAll();
 	}
 	
-	public List<Project> addProject(Project pro){
+	public ResponseEntity<?> addProject(Project pro){
 		projectRepo.save(pro);
-		return projectRepo.findAll();
+		return ResponseEntity.ok(null);
 	} 
 	
-	public List<Project> update(Project pro){
+	public ResponseEntity<?> update(Project pro){
 		projectRepo.save(pro);
-		return projectRepo.findAll();
+		return ResponseEntity.ok(null);
 	} 
 	@Transactional
-	public List<Project> deleteById(int id){
+	public ResponseEntity<?> deleteById(int id){
 		prjEmpRepo.deleteByProjectNum(id);
 		projectRepo.deleteById(id);
-		return projectRepo.findAll();
+		return ResponseEntity.ok(null);
 	} 
 }
