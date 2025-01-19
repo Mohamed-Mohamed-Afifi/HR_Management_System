@@ -3,10 +3,19 @@ package com.afify.hr_system.service.department;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.afify.hr_system.controller.employee.PageInfo;
+import com.afify.hr_system.mapper.department.DeptMapper;
+import com.afify.hr_system.mapper.department.DeptPageDtoMapper;
+import com.afify.hr_system.model.department.DepartDto;
 import com.afify.hr_system.model.department.Department;
+import com.afify.hr_system.model.department.PageDeptDto;
+import com.afify.hr_system.model.employee.EmpPageDto;
 import com.afify.hr_system.model.employee.Employee;
 import com.afify.hr_system.model.projects.Project;
 import com.afify.hr_system.repo.department.DepartmentRepo;
@@ -14,22 +23,27 @@ import com.afify.hr_system.repo.employee.EmployeeRepo;
 import com.afify.hr_system.repo.project.ProjectRepo;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class DepartmentService {
-	@Autowired
-	private DepartmentRepo deptRepo;
-	@Autowired
-	private EmployeeRepo empRepo;
-	@Autowired
-	private ProjectRepo prjRepo;
+	private final DepartmentRepo deptRepo;
+	private final EmployeeRepo empRepo;
+	private final ProjectRepo prjRepo;
+	private final DeptPageDtoMapper deptPageMapper;
+	private final DeptMapper departMapper;
 	
-	public List<Department> getAlldepts(){
-		return deptRepo.findAll();
+	public PageDeptDto getAlldepts(PageInfo page){
+		Pageable pageable=PageRequest.of(page.getPageNum(),page.getPageSize());
+		Page<Department> deptPage=deptRepo.findAll(pageable);
+		PageDeptDto deptPageDto=deptPageMapper.map(deptPage);
+		return deptPageDto;
 	}
 	
-	public ResponseEntity<?> addDept(Department dept){
-		deptRepo.save(dept);
+	public ResponseEntity<?> addDept(DepartDto dept){
+		Department deptDto=departMapper.umMap(dept);
+		deptRepo.save(deptDto);
 		return ResponseEntity.ok(null);
 	} 
 	
@@ -52,6 +66,6 @@ public class DepartmentService {
 		});
 		prjRepo.saveAll(projects);
 		deptRepo.deleteById(id);
-		return ResponseEntity.ok(null);
+		return ResponseEntity.ok("ok");
 	} 
 }

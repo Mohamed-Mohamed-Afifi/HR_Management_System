@@ -47,75 +47,10 @@ public class Project {
 	@JoinColumn(name="Dnum")
 	private Department department;
 	@ManyToMany(cascade = {CascadeType.PERSIST},fetch = FetchType.LAZY)
-	@JoinTable(
+	@JoinTable(name="project_employees",
 			joinColumns = @JoinColumn(name="pno"),
 			inverseJoinColumns = @JoinColumn(name="essn")
 			 )
 	private Set<Employee> employees;
-
-//	public int getPnum() {
-//		return pnum;
-//	}
-//
-//	public void setPnum(int pnum) {
-//		this.pnum = pnum;
-//	}
-//
-//	public String getPname() {
-//		return pname;
-//	}
-//
-//	public void setPname(String pname) {
-//		this.pname = pname;
-//	}
-//
-//	public String getLocation() {
-//		return location;
-//	}
-//
-//	public void setLocation(String location) {
-//		this.location = location;
-//	}
-//
-//	public String getCity() {
-//		return city;
-//	}
-//
-//	public void setCity(String city) {
-//		this.city = city;
-//	}
-//
-//	public Department getDepartment() {
-//		return department;
-//	}
-//
-//	public void setDepartment(Department department) {
-//		this.department = department;
-//	}
-//
-//	public Set<Employee> getEmployees() {
-//		return employees;
-//	}
-//
-//	public void setEmployees(Set<Employee> employees) {
-//		this.employees = employees;
-//	}
-//
-//	public Project(int pnum, String pname, String location, String city, Department department,
-//			Set<Employee> employees) {
-//		super();
-//		this.pnum = pnum;
-//		this.pname = pname;
-//		this.location = location;
-//		this.city = city;
-//		this.department = department;
-//		this.employees = employees;
-//	}
-//
-//	public Project() {
-//		super();
-//	}
-	
-	
 	
 }

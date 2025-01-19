@@ -10,8 +10,8 @@ import com.afify.hr_system.model.dependent.Dependent;
 import com.afify.hr_system.model.projects.Project;
 
 public interface DepartmentRepo extends JpaRepository<Department, Integer>{
-	@EntityGraph(attributePaths = {"supervisor","employees","projects"})
+	@EntityGraph(attributePaths = {"supervisor","supervisor.manager","employees","projects"})
 	public List<Department> findAll();
-	@EntityGraph(attributePaths = {"supervisor","employees","projects"})
+	@EntityGraph(attributePaths = {"supervisor","supervisor.manager","employees","projects"})
 	public List<Department> findById(int id);
 }

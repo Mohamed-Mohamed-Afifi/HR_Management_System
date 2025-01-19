@@ -26,31 +26,7 @@ public class DependentPrimaryKey {
 	@JoinColumn(name="ESSN")
 	private Employee employee;
 
-//	public String getDepname() {
-//		return depname;
-//	}
-//
-//	public void setDepname(String depname) {
-//		this.depname = depname;
-//	}
-//
-//	public Employee getEmployee() {
-//		return employee;
-//	}
-//
-//	public void setEmployee(Employee employee) {
-//		this.employee = employee;
-//	}
-//
-//	public DependentPrimaryKey(String depname, Employee employee) {
-//		super();
-//		this.depname = depname;
-//		this.employee = employee;
-//	}
-//
-//	public DependentPrimaryKey() {
-//		super();
-//	} 
+
 	
 	
 }

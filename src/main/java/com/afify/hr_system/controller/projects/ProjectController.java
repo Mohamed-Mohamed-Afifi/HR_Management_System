@@ -14,19 +14,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.afify.hr_system.model.projects.Project;
+import com.afify.hr_system.model.projects.ProjectDto;
+import com.afify.hr_system.repo.department.DepartmentRepo;
+import com.afify.hr_system.repo.employee.EmployeeRepo;
+import com.afify.hr_system.repo.project.ProjectRepo;
 import com.afify.hr_system.service.project.ProjectService;
+
+import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/projects")
+@RequiredArgsConstructor
 public class ProjectController {
-	@Autowired
-	private ProjectService prjService;
+
+	private final ProjectService prjService;
 	
 	@GetMapping("")
-	public List<Project> getAll(){
+	public List<ProjectDto> getAll(){
 		return prjService.getAllProjects();
 	}
 	@PostMapping("")
-	public ResponseEntity<?> addEmp(@RequestBody Project prj){
+	public ResponseEntity<?> addEmp(@RequestBody ProjectDto prj){
 		return prjService.addProject(prj);
 	}
 	@DeleteMapping("/{id}")

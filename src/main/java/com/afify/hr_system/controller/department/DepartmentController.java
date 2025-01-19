@@ -1,8 +1,5 @@
 package com.afify.hr_system.controller.department;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,20 +10,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.afify.hr_system.controller.employee.PageInfo;
+import com.afify.hr_system.model.department.DepartDto;
 import com.afify.hr_system.model.department.Department;
+import com.afify.hr_system.model.department.PageDeptDto;
 import com.afify.hr_system.service.department.DepartmentService;
+
+import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/departments")
+@RequiredArgsConstructor
 public class DepartmentController {
-	@Autowired
-	private DepartmentService deptService;
+	private final DepartmentService deptService;
 	
 	@GetMapping("")
-	public List<Department> getAll(){
-		return deptService.getAlldepts();
+	public PageDeptDto getAll(@RequestBody PageInfo page){
+		return deptService.getAlldepts(page);
 	}
 	@PostMapping("")
-	public ResponseEntity<?>  addEmp(@RequestBody Department dept){
+	public ResponseEntity<?>  addEmp(@RequestBody DepartDto dept){
 		return deptService.addDept(dept);
 	}
 	@DeleteMapping("/{id}")

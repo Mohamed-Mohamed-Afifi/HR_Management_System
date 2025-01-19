@@ -14,22 +14,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.afify.hr_system.model.employee.EmpDTO;
+import com.afify.hr_system.model.employee.EmpPageDto;
 import com.afify.hr_system.model.employee.Employee;
+import com.afify.hr_system.repo.department.DepartmentRepo;
+import com.afify.hr_system.repo.employee.EmployeeRepo;
+import com.afify.hr_system.repo.project.ProjectRepo;
 import com.afify.hr_system.service.employee.EmployeeService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/employees")
+@RequiredArgsConstructor
 public class EmployeeController {
-	@Autowired
-	private EmployeeService empService;
+
+	private final EmployeeService empService;
 	
 	@GetMapping("")
-	public Page<Employee> getAll(@RequestBody PageInfo page){
+	public EmpPageDto getAll(@RequestBody PageInfo page){
 		return empService.getAllEmps(page);
 	}
+	@GetMapping("/{ssn}")
+	public ResponseEntity<?> getEmployeeById(@PathVariable int ssn) {
+		return empService.getEmployee(ssn);
+	}
 	@PostMapping("")
-	public ResponseEntity<?>  addEmp(@RequestBody Employee emp){
-		return empService.addEmp(emp);
+	public ResponseEntity<?>  addEmp(@RequestBody EmpDTO empDto){
+		return empService.addEmp(empDto);
 	}
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteEmp(@PathVariable int id){

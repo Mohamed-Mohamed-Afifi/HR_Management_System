@@ -27,40 +27,7 @@ public class Dependent {
 	@Column(name="Bdate")
 	private LocalDateTime bdate;
 
-//	public DependentPrimaryKey getDependentId() {
-//		return dependentId;
-//	}
-//
-//	public void setDependentId(DependentPrimaryKey dependentId) {
-//		this.dependentId = dependentId;
-//	}
-//
-//	public String getSex() {
-//		return sex;
-//	}
-//
-//	public void setSex(String sex) {
-//		this.sex = sex;
-//	}
-//
-//	public LocalDateTime getBdate() {
-//		return bdate;
-//	}
-//
-//	public void setBdate(LocalDateTime bdate) {
-//		this.bdate = bdate;
-//	}
-//
-//	public Dependent(DependentPrimaryKey dependentId, String sex, LocalDateTime bdate) {
-//		super();
-//		this.dependentId = dependentId;
-//		this.sex = sex;
-//		this.bdate = bdate;
-//	}
-//
-//	public Dependent() {
-//		super();
-//	}
+
 	
 	
 }

@@ -1,4 +1,6 @@
 spring:
+  server:
+    port: 9090
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
@@ -21,9 +23,7 @@ spring:
     show-sql: true
   logging:
     level:
-      org:
-        hibernate:
-          SQL: DEBUG
+      org.hibernate.SQL: DEBUG
 
 my:
   app:
