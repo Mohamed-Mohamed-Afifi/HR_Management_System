@@ -6,12 +6,10 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.NativeQuery;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.afify.hr_system.model.dependent.Dependent;
 import com.afify.hr_system.model.dependent.DependentPrimaryKey;
-import com.afify.hr_system.model.projects.Project;
 
 import jakarta.transaction.Transactional;
 

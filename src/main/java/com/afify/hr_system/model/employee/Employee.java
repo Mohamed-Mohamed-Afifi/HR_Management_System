@@ -8,7 +8,6 @@ import com.afify.hr_system.model.dependent.Dependent;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,6 +18,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.PostLoad;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,15 +35,20 @@ public class Employee {
 	
 	@Id
 	@Column(name="SSN")
-	private int ssn;
+	private Integer ssn;
+	@NotNull
 	@Column(name ="Fname")
 	private String fname;
+	@NotNull
 	@Column(name ="Lname")
 	private String lname;
+	@NotNull
 	@Column(name="Bdate")
 	private LocalDateTime bdate;
+	@NotBlank
 	@Column(name="address")
 	private String address;
+	@NotBlank
 	@Column(name="Sex")
 	private String sex;
 	@Column(name="Salary")
@@ -50,15 +56,14 @@ public class Employee {
 	@Transient
 	private int pouns;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="Superssn")
 	private Employee manager;
 	
-	@OneToMany(mappedBy = "dependentId.employee",cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "dependentId.employee",fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<Dependent> dependents;
-	
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonBackReference
 	@JoinColumn(name="Dno")
 	private Department department;

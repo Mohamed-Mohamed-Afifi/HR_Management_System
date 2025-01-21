@@ -16,6 +16,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,19 +31,19 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Project {
 	
+	@NotNull
 	@Id
 	@Column(name="Pnumber")
 	private int pnum;
-	
+	@NotBlank
 	@Column(name="Pname")
 	private String pname;
-	
+	@NotBlank
 	@Column(name="Plocation")
 	private String location;
-	
+	@NotBlank
 	@Column(name="City")
 	private String city;
-	
 	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.LAZY)
 	@JsonBackReference
 	@JoinColumn(name="Dnum")

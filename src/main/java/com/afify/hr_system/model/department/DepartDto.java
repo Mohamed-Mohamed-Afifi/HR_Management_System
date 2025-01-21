@@ -6,6 +6,8 @@ import java.util.List;
 import com.afify.hr_system.model.employee.EmpDTO;
 import com.afify.hr_system.model.projects.ProjectDto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,8 +18,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DepartDto {
+	@NotNull
 	private int dnum;
+	@NotBlank
 	private String dname;
+	@NotNull
 	private LocalDateTime mgsStartDate;
 	private String supervisorName;
 	private Integer supervisorSsn;

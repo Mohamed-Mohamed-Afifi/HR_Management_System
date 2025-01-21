@@ -27,14 +27,14 @@ public class DependentService {
 	}
 	
 	public ResponseEntity<?> addDependent(DependentDto depntDto){
-		System.out.println(depntDto);
 		Dependent dependent=depnMapper.unmap(depntDto);
 		dependentRepo.save(dependent);
 		return ResponseEntity.ok(null);
 	} 
 	
-	public ResponseEntity<?> update(Dependent dept){
-		dependentRepo.save(dept);
+	public ResponseEntity<?> update(DependentDto depntDto){
+		Dependent dependent=depnMapper.unmap(depntDto);
+		dependentRepo.save(dependent);
 		return ResponseEntity.ok(null);
 	} 
 	

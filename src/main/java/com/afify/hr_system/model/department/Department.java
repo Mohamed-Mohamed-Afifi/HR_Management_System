@@ -18,6 +18,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,18 +32,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Department {
-	
+	@NotNull
 	@Id
 	@Column(name="Dnum")
-	private int departmentNumber;
-	
+	private Integer departmentNumber;
+	@NotBlank
 	@Column(name="Dname")
 	private String dname;
-	
+	@NotNull
 	@Column(name="MGRStart Date")
 	private LocalDateTime mgsStartDate;
 	@Formula(value = "(select count(*) from employee emp where emp.dno = dnum)")
 	private int numOfEmp;
+	
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name="MGRSSN")
 	private Employee supervisor;

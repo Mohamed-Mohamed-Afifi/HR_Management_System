@@ -9,12 +9,12 @@ import org.springframework.data.jpa.repository.Query;
 import com.afify.hr_system.model.projects.Project;
 
 public interface ProjectRepo extends JpaRepository<Project, Integer>{
-	@EntityGraph(attributePaths = {"department","employees","employees.manager","employees.department"})
+	@EntityGraph(attributePaths = {"department","employees"})
 	public List<Project> findByDepartmentDepartmentNumber(int id);
 	@Query("delete from Project prj where prj.department.departmentNumber =:id")
 	public void DeleteByDepartmentDepartmentNumber(int id);
-	@EntityGraph(attributePaths = {"department","employees","employees.manager","employees.department"})
+	@EntityGraph(attributePaths = {"department","employees"})
 	public List<Project> findAll();
-	@EntityGraph(attributePaths = {"department","employees","employees.manager","employees.department"})
+	@EntityGraph(attributePaths = {"department","employees"})
 	public List<Project> findById(int id);
 }

@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
 import com.afify.hr_system.mapper.employee.EmpMapper;
+import com.afify.hr_system.model.department.Department;
 import com.afify.hr_system.model.projects.Project;
 import com.afify.hr_system.model.projects.ProjectDto;
 
@@ -13,7 +14,7 @@ public interface ProjectMapper {
 	@Mappings({
 			@Mapping(source = "projectId",target = "pnum"),
 			@Mapping(source = "projectName",target = "pname"),
-			@Mapping(source = "departmentNumber",target = "department.departmentNumber"),
+			@Mapping(expression = "java(mapDepartment(projectDto.getDepartmentNumber()))",target = "department"),
 			@Mapping(source = "employees",target = "employees")
 			  })
 	Project unmaped(ProjectDto projectDto);
@@ -24,4 +25,14 @@ public interface ProjectMapper {
 		@Mapping(target = "employees",source = "employees")
 		  })
 	ProjectDto map(Project project);
+	
+	default Department mapDepartment(Integer dnum) {
+		if(dnum==null) {
+			return null;
+		}else {
+			Department dept=new Department();
+			dept.setDepartmentNumber(dnum);
+			return dept;
+		}
+	}
 }
