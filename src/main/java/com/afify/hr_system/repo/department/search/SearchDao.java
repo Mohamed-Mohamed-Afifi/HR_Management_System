@@ -47,7 +47,12 @@ public class SearchDao implements Specification<Department> {
         if (searchArgs.getDname() != null && !searchArgs.getDname().isEmpty()) {
             predicates.add(cb.like(root.get("dname"), "%" + searchArgs.getDname() + "%"));
         }
-
+        if(searchArgs.getDnum()!=null) {
+        	 predicates.add(cb.equal(root.get("departmentNumber"), searchArgs.getDnum()));
+        }
+        if(searchArgs.getSupervisorName()!=null &&!searchArgs.getSupervisorName().isEmpty()) {
+        	
+        }
         // Return predicates combined with AND logic
         return cb.and(predicates.toArray(new Predicate[0]));
     }

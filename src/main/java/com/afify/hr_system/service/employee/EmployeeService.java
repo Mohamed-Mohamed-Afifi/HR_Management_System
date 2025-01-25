@@ -1,6 +1,7 @@
 package com.afify.hr_system.service.employee;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.afify.hr_system.controller.employee.PageInfo;
+import com.afify.hr_system.error.RecordNotFoundException;
 import com.afify.hr_system.mapper.employee.EmpMapper;
 import com.afify.hr_system.mapper.employee.EmpPageMapper;
 import com.afify.hr_system.model.department.Department;
@@ -49,8 +51,15 @@ public class EmployeeService{
 		return empPageDto;
 	}
 	public ResponseEntity<?> getEmployee(int id){
-
-		Employee emp=empRepo.findById(id).get();
+		
+		Optional<Employee> entity=empRepo.findById(id);
+		Employee emp;
+		if(!entity.isPresent()) {
+			throw new RecordNotFoundException("Record Not found");
+		}else {
+			emp=empRepo.findById(id).get();
+		}
+//		if(emp.Prisist)
 		EmpDTO empDto=empMapper.empToDto(emp);
 		return ResponseEntity.ok(empDto);
 	}

@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.afify.hr_system.controller.employee.PageInfo;
 import com.afify.hr_system.mapper.department.DeptMapper;
 import com.afify.hr_system.mapper.department.DeptPageDtoMapper;
 import com.afify.hr_system.model.department.DepartDto;
@@ -34,8 +33,8 @@ public class DepartmentService {
 	private final DeptPageDtoMapper deptPageMapper;
 	private final DeptMapper departMapper;
 	
-	public PageDeptDto getAlldepts(PageInfo page){
-		Pageable pageable=PageRequest.of(page.getPageNum(),page.getPageSize());
+	public PageDeptDto getAlldepts(int pageNumber,int pageSize){
+		Pageable pageable=PageRequest.of(pageNumber,pageSize);
 		Page<Department> deptPage=deptRepo.findAll(pageable);
 		PageDeptDto deptPageDto=deptPageMapper.map(deptPage);
 		return deptPageDto;
