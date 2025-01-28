@@ -13,6 +13,6 @@ public class AppUserDetailsService {
 public final UserRepo userRepo;
 
 public UserDetails loadByUserName(String userName) {
-	return userRepo.findByUserName(userName);
+	return userRepo.findByEmail(userName);
 }
 }

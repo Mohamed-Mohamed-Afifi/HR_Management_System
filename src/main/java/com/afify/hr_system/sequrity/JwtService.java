@@ -7,6 +7,7 @@ import java.util.function.Function;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,13 @@ import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
-    private static final String SECRET_KEY = "6L9bZzFI6b93aYd6R3qL2tpUSfJHEJ16NpQ92Bwl6yU=";
+	 @Value("${application.security.jwt.secret-key}")
+    private  String SECRET_KEY;
 
     public String extractUserEmail(String token) {
         return extractClaim(token, Claims::getSubject);
     }
-
+// Get entrie payload object {subject:"mohamed@gamil.com",isIssueAt:data of creatign , IsExpiration:dateofdxpiration}
     public Claims extactAllClaims(String token) {
         return Jwts.parser()
                    .verifyWith(getPublicSigningKey())
@@ -36,7 +38,7 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
-
+// get one of claims may be sub or expireddate via method take claims and return T
     public <T> T extractClaim(String token, Function<Claims, T> claimResolver) {
         final Claims claims = extactAllClaims(token);
         return claimResolver.apply(claims);

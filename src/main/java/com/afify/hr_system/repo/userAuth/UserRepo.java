@@ -10,13 +10,13 @@ import com.afify.hr_system.model.appUser.AppUser;
 
 public interface UserRepo extends JpaRepository<AppUser,Integer>{
 	
-	@EntityGraph(attributePaths = {"roles"})
-	AppUser findByUserName(String userName);
+	@EntityGraph(attributePaths = {"tokens"})
+	AppUser findByEmail(String userName);
 	
-	@EntityGraph(attributePaths = {"roles"})
+	@EntityGraph(attributePaths = {"tokens"})
 	List<AppUser> findAll();
 	
-	@EntityGraph(attributePaths = {"roles"})
+	@EntityGraph(attributePaths = {"tokens"})
 	Optional<AppUser> findById(int id);
 
 }

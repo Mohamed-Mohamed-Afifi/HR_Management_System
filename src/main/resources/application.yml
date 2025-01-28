@@ -29,3 +29,8 @@ my:
   app:
     deptName: it
     deptNum: 20
+
+application:
+  security:
+    jwt:
+      secret-key: "6L9bZzFI6b93aYd6R3qL2tpUSfJHEJ16NpQ92Bwl6yU="

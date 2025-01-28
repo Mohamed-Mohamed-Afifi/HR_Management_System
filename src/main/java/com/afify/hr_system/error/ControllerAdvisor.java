@@ -28,6 +28,18 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler{
 	public ResponseEntity<?> handleDuplicated(DuplicatedException ex){
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(ex.getLocalizedMessage(),400));
 	}
+//	TokenNotValid
+	@ExceptionHandler(TokenNotVaild.class)
+	public ResponseEntity<?> handleTokenNotValid(TokenNotVaild ex){
+		ErrorResponse error=new ErrorResponse(ex.getLocalizedMessage(), 403);
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+	}
+//	In-correct Password
+	@ExceptionHandler(PasswordIsNotCorrected.class)
+	public ResponseEntity<?> handleIncorrectPass(PasswordIsNotCorrected ex){
+		ErrorResponse error=new ErrorResponse(ex.getLocalizedMessage(), 404);
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+	}
 // For Validation
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,

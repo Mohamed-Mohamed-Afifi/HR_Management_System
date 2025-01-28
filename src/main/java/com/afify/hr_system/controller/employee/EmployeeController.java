@@ -1,6 +1,7 @@
 package com.afify.hr_system.controller.employee;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,11 +27,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Validated
 @CrossOrigin(origins = "http://localhost:5173")
+@PreAuthorize("hasRole('ADMIN')")
 public class EmployeeController {
 
 	private final EmployeeService empService;
 	
 	@GetMapping("")
+	@PreAuthorize("hasAuthority('admin:read')")
 	public EmpPageDto getAll(@RequestBody PageInfo page){
 		return empService.getAllEmps(page);
 	}

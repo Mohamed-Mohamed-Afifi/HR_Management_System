@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,8 +21,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,6 +35,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AppUser implements UserDetails{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,23 +48,20 @@ public class AppUser implements UserDetails{
 	private String password;
 	
 	@Column(name="user_name")
-	private String userName;
+	private String email;
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
+		
+	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+	@JsonBackReference
+	Set<Token> tokens;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(
-			name = "user_role",
-			joinColumns= @JoinColumn(name="user_id"),
-			inverseJoinColumns = @JoinColumn(name="role_id")
-			  )
-	private Set<AppRole> roles;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return List.of(new SimpleGrantedAuthority(role.name()));
+		return role.getAuthorities();
 	}
 
 	@Override
@@ -70,7 +72,7 @@ public class AppUser implements UserDetails{
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return userName;
+		return email;
 	}
 
 	@Override
