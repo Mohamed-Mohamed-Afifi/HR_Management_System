@@ -44,7 +44,7 @@ public class Project {
 	@NotBlank
 	@Column(name="City")
 	private String city;
-	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.LAZY)
+	@ManyToOne(cascade = {CascadeType.PERSIST},fetch = FetchType.LAZY)
 	@JsonBackReference
 	@JoinColumn(name="Dnum")
 	private Department department;

@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.afify.hr_system.model.projects.ProjectDto;
+import com.afify.hr_system.model.projects.ProjectPageDto;
+import com.afify.hr_system.repo.project.search.PageSearchSpec;
 import com.afify.hr_system.service.project.ProjectService;
 
 import jakarta.validation.Valid;
@@ -30,8 +33,8 @@ public class ProjectController {
 	private final ProjectService prjService;
 	
 	@GetMapping("")
-	public List<ProjectDto> getAll(){
-		return prjService.getAllProjects();
+	public ProjectPageDto getAll(@RequestParam int pageNum,@RequestParam int pageSize){
+		return prjService.getAllProjects(pageNum,pageSize);
 	}
 	@PostMapping("")
 	public ResponseEntity<?> addEmp(@RequestBody @Valid ProjectDto prj){
@@ -44,5 +47,9 @@ public class ProjectController {
 	@PutMapping("")
 	public ResponseEntity<?>  udpateEmp(@RequestBody @Valid ProjectDto prj){
 		return prjService.update(prj);
+	}
+	@PostMapping("search")
+	public ResponseEntity<?> filter(@RequestBody PageSearchSpec pageSearchSpec){
+		return prjService.filter(pageSearchSpec);
 	}
 }

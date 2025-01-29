@@ -34,5 +34,6 @@ public class EmpDTO {
 	private int salary;	
 	private Integer manager_ssn;
 	private Integer department_number;
+	private String department_name;
 //	private List<DependentDto>dependents;
 }

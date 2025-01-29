@@ -1,7 +1,8 @@
 package com.afify.hr_system.controller.auth;
 
+
+
 import com.afify.hr_system.mapper.user.UserDto;
-import com.afify.hr_system.model.appUser.AppUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

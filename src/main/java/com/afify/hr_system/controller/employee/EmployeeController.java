@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.afify.hr_system.model.employee.EmpDTO;
@@ -27,15 +28,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Validated
 @CrossOrigin(origins = "http://localhost:5173")
-@PreAuthorize("hasRole('ADMIN')")
+//@PreAuthorize("hasRole('ADMIN')")
 public class EmployeeController {
 
 	private final EmployeeService empService;
 	
 	@GetMapping("")
-	@PreAuthorize("hasAuthority('admin:read')")
-	public EmpPageDto getAll(@RequestBody PageInfo page){
-		return empService.getAllEmps(page);
+//	@PreAuthorize("hasAuthority('admin:read')")
+	public EmpPageDto getAll(@RequestParam int pageNum,@RequestParam int pageSize){
+		return empService.getAllEmps(pageNum,pageSize);
 	}
 	@GetMapping("/{ssn}")
 	public ResponseEntity<?> getEmployeeById(@PathVariable @NotNull int ssn) {

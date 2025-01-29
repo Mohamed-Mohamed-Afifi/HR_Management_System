@@ -44,8 +44,8 @@ public class EmployeeService{
 	private final DepartmentRepo departmentRepo;
 	
 
-	public EmpPageDto getAllEmps(PageInfo pageInfo){
-		Pageable pageable=PageRequest.of(pageInfo.getPageNum()-1,pageInfo.getPageSize());
+	public EmpPageDto getAllEmps(int pageNum,int pageSize){
+		Pageable pageable=PageRequest.of(pageNum,pageSize);
 		Page<Employee> pagedEmp=empRepo.findAll(pageable);
 		EmpPageDto empPageDto=empPageMapper.map(pagedEmp);
 		return empPageDto;
@@ -65,19 +65,19 @@ public class EmployeeService{
 	}
 	public ResponseEntity<?> addEmp(EmpDTO empDto){
 
-		Employee employee=empMapper.maptoEntity(empDto);
+		Employee employee=empMapper.mapToEntity(empDto);
 		empRepo.save(employee);
 		return ResponseEntity.ok(null);
 	} 
 	
 	public ResponseEntity<?> updateEmp(EmpDTO empDto){
-		Employee employee=empMapper.maptoEntity(empDto);
+		Employee employee=empMapper.mapToEntity(empDto);
 		empRepo.save(employee);
 		return ResponseEntity.ok(null);
 	} 
 	public ResponseEntity<?> search(PageFilter pageFilter){
 			SearchDao searchDao=new SearchDao(pageFilter.getSearchArgs());
-			Pageable pageable =PageRequest.of(pageFilter.getPageNumber()-1, pageFilter.getPageSize());
+			Pageable pageable =PageRequest.of(pageFilter.getPageNumber(), pageFilter.getPageSize());
 			Page<Employee> employess=empRepo.findAll(searchDao,pageable);
 			EmpPageDto empPageDto=empPageMapper.map(employess);
 		return ResponseEntity.ok(empPageDto);

@@ -16,12 +16,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProjectDto {
 	@NotNull
-    private int projectId;
+    private Integer projectId;
 	@NotBlank
     private String projectName;
-	@NotBlank
+
     private String location;
-	@NotBlank
+
     private String city;
     private Integer departmentNumber;
     private Set<EmpDTO> employees;

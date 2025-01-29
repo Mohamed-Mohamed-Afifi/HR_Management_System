@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.afify.hr_system.model.dependent.DependentDto;
 import com.afify.hr_system.model.dependent.DependentPrimaryKey;
+import com.afify.hr_system.repo.dependent.search.PageSearchSpec;
 import com.afify.hr_system.service.dependent.DependentService;
 
 import jakarta.validation.Valid;
@@ -29,8 +31,8 @@ public class DependentController {
 	private final DependentService deService;
 	
 	@GetMapping("")
-	public List<DependentDto> getAll(){
-		return deService.getAlldependents();
+	public ResponseEntity<?> getAll(@RequestParam int pageNum,@RequestParam int pageSize){
+		return ResponseEntity.ok(deService.getAlldependents(pageNum,pageSize));
 	}
 	@PostMapping("")
 	public ResponseEntity<?> addEmp(@RequestBody @Valid DependentDto dep){
@@ -43,6 +45,10 @@ public class DependentController {
 	@PutMapping("")
 	public ResponseEntity<?>  udpateEmp(@RequestBody @Valid DependentDto dep){
 		return deService.update(dep);
+	}
+	@PostMapping("/search")
+	public ResponseEntity<?> filter(@RequestBody PageSearchSpec pageSpec){
+		return ResponseEntity.ok(deService.filter(pageSpec));
 	}
 }
 
