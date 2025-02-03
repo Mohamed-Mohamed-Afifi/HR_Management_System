@@ -3,6 +3,13 @@ package com.afify.hr_system.model.employee;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import com.afify.hr_system.model.department.Department;
 import com.afify.hr_system.model.dependent.Dependent;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -10,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -31,6 +39,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Employee {
 	
 	@Id
@@ -76,5 +85,29 @@ public class Employee {
 	}
 
 	
+	@CreatedDate
+	@Column(
+			updatable = false,
+			nullable = false
+			)
+	@CreationTimestamp
+	private LocalDateTime created_at;
 	
+	@LastModifiedDate
+	@Column(
+			insertable = false
+			)
+	private LocalDateTime lastModified;
+	@CreatedBy
+	@Column(
+			updatable = false,
+			nullable = false
+			)
+	private String created_by;
+	
+	@LastModifiedBy
+	@Column(
+			insertable = false
+			)
+	private String lastModified_by;
 }

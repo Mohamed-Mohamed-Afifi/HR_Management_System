@@ -22,5 +22,9 @@ private final AppUserDetailsService appUserDetailsService;
 	public ResponseEntity<?> getUser(@PathVariable String email) {
 		return ResponseEntity.ok(appUserDetailsService.loadByUserName(email));
 	}
+	@GetMapping("")
+	public ResponseEntity<?> getAllusers(){
+		return null;
+	}
 	
 }

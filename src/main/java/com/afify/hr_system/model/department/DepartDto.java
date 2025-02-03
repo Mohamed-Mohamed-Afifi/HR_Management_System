@@ -29,4 +29,8 @@ public class DepartDto {
 	private int numOfEmp;
 	private List<EmpDTO> employees;
 	private List<ProjectDto> projects;
+    private LocalDateTime created_at;
+    private LocalDateTime lastModified;
+    private String created_by;
+    private String lastModified_by;
 }

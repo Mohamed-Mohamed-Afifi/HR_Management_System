@@ -21,6 +21,6 @@ public interface ProjectRepo extends JpaRepository<Project, Integer> , JpaSpecif
 	public List<Project> findAll();
 	@EntityGraph(attributePaths = {"department","employees"})
 	public List<Project> findById(int id);
-//	@EntityGraph(attributePaths = {"department","employees"})
-//	public Page<Project> findAll(Specification<Project> spec,Pageable page);
+	@EntityGraph(attributePaths = {"department","employees"})
+	public Page<Project> findAll(Specification<Project> spec,Pageable page);
 }

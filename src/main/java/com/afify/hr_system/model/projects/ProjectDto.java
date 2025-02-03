@@ -1,5 +1,6 @@
 package com.afify.hr_system.model.projects;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import com.afify.hr_system.model.employee.EmpDTO;
@@ -25,5 +26,9 @@ public class ProjectDto {
     private String city;
     private Integer departmentNumber;
     private Set<EmpDTO> employees;
+    private LocalDateTime created_at;
+    private LocalDateTime lastModified;
+private String created_by;
+private String lastModified_by;
   
 }

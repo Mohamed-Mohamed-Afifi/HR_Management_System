@@ -36,4 +36,8 @@ public class EmpDTO {
 	private Integer department_number;
 	private String department_name;
 //	private List<DependentDto>dependents;
+    private LocalDateTime created_at;
+    private LocalDateTime lastModified;
+    private String created_by;
+    private String lastModified_by;
 }

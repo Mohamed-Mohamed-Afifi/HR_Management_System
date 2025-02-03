@@ -21,4 +21,8 @@ public class DependentDto {
 	private String sex;
 	@NotNull
 	private LocalDateTime bdate;
+    private LocalDateTime created_at;
+    private LocalDateTime lastModified;
+    private String created_by;
+    private String lastModified_by;
 }

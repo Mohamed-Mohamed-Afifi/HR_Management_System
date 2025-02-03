@@ -1,6 +1,14 @@
 package com.afify.hr_system.model.projects;
 
+import java.time.LocalDateTime;
 import java.util.Set;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.afify.hr_system.model.department.Department;
 import com.afify.hr_system.model.employee.Employee;
@@ -9,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -29,7 +38,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Project {
+@EntityListeners(AuditingEntityListener.class)
+public class Project{
 	
 	@NotNull
 	@Id
@@ -54,5 +64,30 @@ public class Project {
 			inverseJoinColumns = @JoinColumn(name="essn")
 			 )
 	private Set<Employee> employees;
+
+	@CreatedDate
+	@Column(
+			updatable = false,
+			nullable = false
+			)
+	@CreationTimestamp
+	private LocalDateTime created_at;
 	
+	@LastModifiedDate
+	@Column(
+			insertable = false
+			)
+	private LocalDateTime lastModified;
+	@CreatedBy
+	@Column(
+			updatable = false,
+			nullable = false
+			)
+	private String created_by;
+	
+	@LastModifiedBy
+	@Column(
+			insertable = false
+			)
+	private String lastModified_by;
 }
