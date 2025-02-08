@@ -17,9 +17,9 @@ An HR Management System designed to streamline HR processes, including employee 
 
 ## Project Overview
 The system manages HR operations for organizations, with features to handle **employees, departments, projects, dependents, users, roles, and secure authentication**. Built with a modern tech stack:
-- **Backend**: Spring Boot (Java) / Django (Python)
-- **Frontend**: React.js / Angular
-- **Database**: PostgreSQL / MySQL
+- **Backend**: Spring Boot (Java)
+- **Frontend**: React.js 
+- **Database**: MS SQL Server
 - **Tools**: Swagger (API docs), JWT (authentication), Git
 
 ---
