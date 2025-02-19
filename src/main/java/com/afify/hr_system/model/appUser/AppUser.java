@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.afify.hr_system.Base.entity.AudtingEntity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
@@ -20,6 +21,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -36,10 +38,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AppUser implements UserDetails{
+public class AppUser extends AudtingEntity implements UserDetails{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@Column(name="full_name")
 	private String fullName;
@@ -55,8 +57,10 @@ public class AppUser implements UserDetails{
 		
 	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
 	@JsonBackReference
-	Set<Token> tokens;
-	
+	private Set<Token> tokens;
+	@Lob
+	@Column(columnDefinition = "VARBINARY(MAX)")
+	private byte[] image;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

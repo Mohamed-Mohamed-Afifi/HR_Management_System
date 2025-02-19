@@ -9,6 +9,8 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.afify.hr_system.Base.entity.AudtingEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -27,8 +29,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name="Dependent")
-@EntityListeners(AuditingEntityListener.class)
-public class Dependent {
+//@EntityListeners(AuditingEntityListener.class)
+public class Dependent extends AudtingEntity{
 	@NotNull
 	@EmbeddedId
 	private DependentPrimaryKey dependentId;
@@ -39,31 +41,31 @@ public class Dependent {
 	@NotNull
 	@Column(name="Bdate")
 	private LocalDateTime bdate;
-	@CreatedDate
-	@Column(
-			updatable = false,
-			nullable = false
-			)
-	@CreationTimestamp
-	private LocalDateTime created_at;
-	
-	@LastModifiedDate
-	@Column(
-			insertable = false
-			)
-	private LocalDateTime lastModified;
-	@CreatedBy
-	@Column(
-			updatable = false,
-			nullable = false
-			)
-	private String created_by;
-	
-	@LastModifiedBy
-	@Column(
-			insertable = false
-			)
-	private String lastModified_by;
+//	@CreatedDate
+//	@Column(
+//			updatable = false,
+//			nullable = false
+//			)
+//	@CreationTimestamp
+//	private LocalDateTime created_at;
+//	
+//	@LastModifiedDate
+//	@Column(
+//			insertable = false
+//			)
+//	private LocalDateTime lastModified;
+//	@CreatedBy
+//	@Column(
+//			updatable = false,
+//			nullable = false
+//			)
+//	private String created_by;
+//	
+//	@LastModifiedBy
+//	@Column(
+//			insertable = false
+//			)
+//	private String lastModified_by;
 
 	
 	

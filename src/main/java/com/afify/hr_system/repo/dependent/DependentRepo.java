@@ -21,7 +21,7 @@ public interface DependentRepo extends JpaRepository<Dependent, DependentPrimary
 	@Transactional
 	@Modifying
 	@NativeQuery(value = "delete from dependent where ESSN=:ssn")
-//	@EntityGraph(attributePaths = {"dependentId.employee"}) 
+
 	public void deleteByEmpSsn(@Param("ssn") int ssn);
 	@EntityGraph(attributePaths = {"dependentId.employee"})
 	public List<Dependent> findAll();

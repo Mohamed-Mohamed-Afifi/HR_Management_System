@@ -34,9 +34,15 @@ public class SequrityConfig {
             .and()
             .authorizeRequests()
             .requestMatchers("/auth/**").permitAll()
-            .requestMatchers("/departments/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
-            .requestMatchers(HttpMethod.GET, "/departments/**")
-                .hasAnyAuthority(Permission.ADMIN_READ.name(), Permission.MANAGER_READ.name())
+            .requestMatchers(
+                    "/v3/api-docs/**",           // Swagger API docs
+                    "/swagger-ui/**",            // Swagger UI
+                    "/swagger-ui.html",          // Swagger UI HTML
+                    "/webjars/**"                // Webjars for Swagger UI
+                ).permitAll()  
+//            .requestMatchers("/departments/**").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+//            .requestMatchers(HttpMethod.GET, "/departments/**")
+//                .hasAnyAuthority(Permission.ADMIN_READ.name(), Permission.MANAGER_READ.name())
             .anyRequest()
             .authenticated()
             .and()

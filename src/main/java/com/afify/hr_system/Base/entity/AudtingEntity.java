@@ -2,27 +2,52 @@ package com.afify.hr_system.Base.entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
-import lombok.Data;
+import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-public abstract class AudtingEntity {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+public class AudtingEntity {
 
 	@CreatedDate
 	@Column(
-			nullable = false,
-			updatable = false
+			updatable = false,
+			nullable = false
 			)
-	protected LocalDateTime createdAt;
+	@CreationTimestamp
+	private LocalDateTime created_at;
 	
 	@LastModifiedDate
 	@Column(
 			insertable = false
 			)
-	protected LocalDateTime lastModifiedDate;
+	private LocalDateTime lastModified;
+	@CreatedBy
+	@Column(
+			updatable = false,
+			nullable = false
+			)
+	private String created_by;
+	
+	@LastModifiedBy
+	@Column(
+			insertable = false
+			)
+	private String lastModified_by;
 }

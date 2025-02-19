@@ -11,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.afify.hr_system.Base.entity.AudtingEntity;
 import com.afify.hr_system.model.employee.Employee;
 import com.afify.hr_system.model.projects.Project;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,8 +39,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
-public class Department {
+//@EntityListeners(AuditingEntityListener.class)
+public class Department extends AudtingEntity{
 	@NotNull
 	@Id
 	@Column(name="Dnum")
@@ -67,29 +68,29 @@ public class Department {
 	private Set<Project> projects;
 
 
-	@CreatedDate
-	@Column(
-			updatable = false,
-			nullable = false
-			)
-	@CreationTimestamp
-	private LocalDateTime created_at;
-	
-	@LastModifiedDate
-	@Column(
-			insertable = false
-			)
-	private LocalDateTime lastModified;
-	@CreatedBy
-	@Column(
-			updatable = false,
-			nullable = false
-			)
-	private String created_by;
-	
-	@LastModifiedBy
-	@Column(
-			insertable = false
-			)
-	private String lastModified_by;
+//	@CreatedDate
+//	@Column(
+//			updatable = false,
+//			nullable = false
+//			)
+//	@CreationTimestamp
+//	private LocalDateTime created_at;
+//	
+//	@LastModifiedDate
+//	@Column(
+//			insertable = false
+//			)
+//	private LocalDateTime lastModified;
+//	@CreatedBy
+//	@Column(
+//			updatable = false,
+//			nullable = false
+//			)
+//	private String created_by;
+//	
+//	@LastModifiedBy
+//	@Column(
+//			insertable = false
+//			)
+//	private String lastModified_by;
 }
