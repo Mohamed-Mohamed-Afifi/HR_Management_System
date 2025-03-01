@@ -40,4 +40,5 @@ public class EmpDTO {
     private LocalDateTime lastModified;
     private String created_by;
     private String lastModified_by;
+    private String status;
 }

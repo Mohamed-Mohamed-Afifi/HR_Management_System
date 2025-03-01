@@ -22,17 +22,33 @@ public enum Role {
         Permission.MANAGER_READ, 
         Permission.MANAGER_UPDATE, 
         Permission.MANAGER_DELETE, 
-        Permission.MANAGER_WRITE
+        Permission.MANAGER_WRITE,
+		Permission.USER_DELETE,
+		Permission.USER_READ,
+		Permission.USER_UPDATE,
+		Permission.USER_WRITE
     )),
-    USER(Collections.emptySet()),
+    USER(
+    		Set.of(
+    				Permission.USER_DELETE,
+    				Permission.USER_READ,
+    				Permission.USER_UPDATE,
+    				Permission.USER_WRITE
+    				)
+    		),
     MANAGER(Set.of(
         Permission.MANAGER_READ, 
         Permission.MANAGER_UPDATE, 
         Permission.MANAGER_DELETE, 
-        Permission.MANAGER_WRITE
+        Permission.MANAGER_WRITE,
+		Permission.USER_DELETE,
+		Permission.USER_READ,
+		Permission.USER_UPDATE,
+		Permission.USER_WRITE
     ));
 
-//	this mean each field has set of permission
+//	Each constant has two method one to get all permissins assign to it second to get all grantedAuth
+//	this mean each field has set of permission 
     @Getter
     private final Set<Permission> permissions;
 // List of GrantedAuthorites with each Role

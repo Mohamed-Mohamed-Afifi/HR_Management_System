@@ -1,5 +1,7 @@
 package com.afify.hr_system.model.appUser;
 
+import com.afify.hr_system.Base.entity.AudtingEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +18,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AppRole {
+public class AppRole extends AudtingEntity{
 	@Id
 	@GeneratedValue
 	private int id;

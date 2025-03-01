@@ -14,4 +14,5 @@ private String email;
 private String fullname;
 private String password;
 private Role role;
+private byte[] image;
 }

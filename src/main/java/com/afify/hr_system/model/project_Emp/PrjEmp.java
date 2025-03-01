@@ -1,5 +1,7 @@
 package com.afify.hr_system.model.project_Emp;
 
+import com.afify.hr_system.Base.entity.AudtingEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -15,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name="project_employees")
 @Entity
-public class PrjEmp {
+public class PrjEmp extends AudtingEntity{
 	@EmbeddedId
 	private PrjEmpKey prjEmpKey;
 	

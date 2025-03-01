@@ -36,13 +36,14 @@ public class AuthService {
 		user.setEmail(reqReg.getEmail());
 		user.setRole(reqReg.getRole());
 		user.setPassword(passwordEncoder.encode(reqReg.getPassword()));
+		user.setImage(reqReg.getImage());
 		userRepo.save(user);
 		final String jwt=jwtService.generateToken(user);
 		AppUser presistedUser=userRepo.findByEmail(user.getUsername());
 		revokePrevTokens(presistedUser);
 		saveToken(presistedUser, jwt);
 		ResponseAuth responseAuth=new ResponseAuth();
-		UserDto userdto=userMapper.map(user);
+		UserDto userdto=userMapper.map(presistedUser);
 		responseAuth.setUser(userdto);
 		responseAuth.setToken(jwt);
 		return ResponseEntity.ok(responseAuth);

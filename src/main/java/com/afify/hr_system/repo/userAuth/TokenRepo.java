@@ -4,9 +4,14 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.NativeQuery;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.afify.hr_system.model.appUser.Token;
+
+import jakarta.transaction.Transactional;
 
 public interface TokenRepo extends JpaRepository<Token, Integer>{
 	
@@ -16,4 +21,9 @@ public interface TokenRepo extends JpaRepository<Token, Integer>{
 
 	@EntityGraph(attributePaths = {"user"})
 	Token findByToken(String token);
+	
+	@Modifying(flushAutomatically = true,clearAutomatically = true)
+	@Transactional
+	@NativeQuery(value="delete from token where user_id=:id")
+	public void deleteByUserId(@Param("id") int id);
 }

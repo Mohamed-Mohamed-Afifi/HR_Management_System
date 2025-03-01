@@ -11,7 +11,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
+	private int id;
 	private String email;
 	private String fullName;
 	private Role role;
+	private String profileimg; // Base64 encoded string
 }

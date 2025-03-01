@@ -24,6 +24,7 @@ public class JwtService {
 
     public String extractUserEmail(String token) {
         return extractClaim(token, Claims::getSubject);
+//        return extactAllClaims(token).getSubject();
     }
 // Get entrie payload object {subject:"mohamed@gamil.com",isIssueAt:data of creatign , IsExpiration:dateofdxpiration}
     public Claims extactAllClaims(String token) {

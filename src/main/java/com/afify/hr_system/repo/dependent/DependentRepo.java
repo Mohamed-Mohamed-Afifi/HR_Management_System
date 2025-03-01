@@ -17,16 +17,16 @@ import com.afify.hr_system.model.dependent.DependentPrimaryKey;
 import jakarta.transaction.Transactional;
 
 public interface DependentRepo extends JpaRepository<Dependent, DependentPrimaryKey>{
-	
+
 	@Transactional
 	@Modifying
 	@NativeQuery(value = "delete from dependent where ESSN=:ssn")
-//	@EntityGraph(attributePaths = {"dependentId.employee"}) 
-    void deleteByEmpSsn(@Param("ssn") int ssn);
+
+	public void deleteByEmpSsn(@Param("ssn") int ssn);
 	@EntityGraph(attributePaths = {"dependentId.employee"})
-    List<Dependent> findAll();
+	public List<Dependent> findAll();
 	@EntityGraph(attributePaths = {"dependentId.employee"})
-    List<Dependent> findByDependentIdEmployeeSsn(int id);
+	public List<Dependent> findByDependentIdEmployeeSsn(int id);
 	@EntityGraph(attributePaths = {"dependentId.employee"})
-    Page<Dependent> findAll(Specification<Dependent> spec, Pageable page);
+	public Page<Dependent> findAll(Specification<Dependent> spec,Pageable page);
 }
