@@ -14,9 +14,9 @@ public interface PrjEmpRepo extends JpaRepository<PrjEmp, PrjEmpKey>{
 	@Transactional
 	@Modifying
 	@NativeQuery(value="delete from project_employees where essn=:ssn")
-	public void deleteByEmpSsn(@Param("ssn") int ssn);
+    void deleteByEmpSsn(@Param("ssn") int ssn);
 	@Transactional
 	@Modifying
 	@NativeQuery(value="delete from project_employees where pno=:ssn")
-	public void deleteByProjectNum(@Param("ssn") int ssn);
+    void deleteByProjectNum(@Param("ssn") int ssn);
 }

@@ -18,22 +18,22 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer>,JpaSpecif
 //    @Query("SELECT DISTINCT e FROM Employee e LEFT JOIN FETCH e.department LEFT JOIN FETCH e.manager LEFT JOIN FETCH e.dependents")
 
     @EntityGraph(attributePaths = {"department", "manager","dependents"})
-    public List<Employee> findByDepartmentDepartmentNumber(int num);
+    List<Employee> findByDepartmentDepartmentNumber(int num);
 //    @Query("SELECT DISTINCT e FROM Employee e LEFT JOIN FETCH e.department LEFT JOIN FETCH e.manager LEFT JOIN FETCH e.dependents")
 
     @EntityGraph(attributePaths = {"department", "manager","dependents"})
-    public List<Employee> findByManagerSsn(int ssn);
+    List<Employee> findByManagerSsn(int ssn);
 	
 //    @Query("SELECT DISTINCT e FROM Employee e LEFT JOIN FETCH e.department LEFT JOIN FETCH e.manager LEFT JOIN FETCH e.dependents")
 
     @EntityGraph(attributePaths = {"department", "manager","dependents"})
-	    public Optional<Employee> findById(int id);
+    Optional<Employee> findById(int id);
 
 //	    @EntityGraph(attributePaths = {"department", "manager","department.supervisor","department.supervisor.manager","department.supervisor.supervisor"})
 //    @Query("SELECT DISTINCT e FROM Employee e LEFT JOIN FETCH e.department LEFT JOIN FETCH e.manager LEFT JOIN FETCH e.dependents")
 
     @EntityGraph(attributePaths = {"department", "manager","dependents"})
-	    public Page<Employee> findAll(Pageable page);
+    Page<Employee> findAll(Pageable page);
 //	@Query("SELECT DISTINCT e FROM Employee e LEFT JOIN FETCH e.department LEFT JOIN FETCH e.manager LEFT JOIN FETCH e.dependents")
     @EntityGraph(attributePaths = {"department", "manager","dependents"})
 	    Page<Employee> findAll(Specification<Employee> spec, Pageable pageable);

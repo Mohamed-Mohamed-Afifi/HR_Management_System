@@ -14,13 +14,13 @@ import com.afify.hr_system.model.projects.Project;
 
 public interface ProjectRepo extends JpaRepository<Project, Integer> , JpaSpecificationExecutor<Project>{
 	@EntityGraph(attributePaths = {"department","employees"})
-	public List<Project> findByDepartmentDepartmentNumber(int id);
+    List<Project> findByDepartmentDepartmentNumber(int id);
 	@Query("delete from Project prj where prj.department.departmentNumber =:id")
-	public void DeleteByDepartmentDepartmentNumber(int id);
+    void DeleteByDepartmentDepartmentNumber(int id);
 	@EntityGraph(attributePaths = {"department","employees"})
-	public List<Project> findAll();
+    List<Project> findAll();
 	@EntityGraph(attributePaths = {"department","employees"})
-	public List<Project> findById(int id);
+    List<Project> findById(int id);
 	@EntityGraph(attributePaths = {"department","employees"})
-	public Page<Project> findAll(Specification<Project> spec,Pageable page);
+    Page<Project> findAll(Specification<Project> spec, Pageable page);
 }

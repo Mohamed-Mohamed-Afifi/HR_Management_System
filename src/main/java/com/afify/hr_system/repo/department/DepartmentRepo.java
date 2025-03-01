@@ -16,9 +16,9 @@ import com.afify.hr_system.model.employee.Employee;
 
 public interface DepartmentRepo extends JpaRepository<Department, Integer>,JpaSpecificationExecutor<Department>{
 	@EntityGraph(attributePaths = {"supervisor","supervisor.manager","employees","projects"})
-	public List<Department> findAll();
+    List<Department> findAll();
 	@EntityGraph(attributePaths = {"supervisor","supervisor.manager","employees","projects"})
-	public List<Department> findById(int id);
+    List<Department> findById(int id);
 	
 //	@EntityGraph(attributePaths = {"supervisor","supervisor.manager","employees","projects"})
 //	public List<Department> findBySupervisorSsn(int ssn);

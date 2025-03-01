@@ -16,7 +16,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
 public class SearchDao implements Specification<Employee> {
-    private SearchArgs searchArgs;
+    private final SearchArgs searchArgs;
 
     public SearchDao(SearchArgs searchArgs) {
         this.searchArgs = searchArgs;

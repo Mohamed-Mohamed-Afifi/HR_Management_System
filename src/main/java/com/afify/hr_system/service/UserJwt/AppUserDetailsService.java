@@ -23,8 +23,8 @@ public UserDetails loadByUserName(String userName) {
 	return userRepo.findByEmail(userName);
 }
 public List<UserDto> getAllusers(){
-	List<AppUser> users=userRepo.findAll();;
-	List<UserDto> usersDto=users.stream().map(userMapper::map).collect(Collectors.toList());
+	List<AppUser> users=userRepo.findAll();
+    List<UserDto> usersDto=users.stream().map(userMapper::map).collect(Collectors.toList());
 	return usersDto;
 } 
 }
