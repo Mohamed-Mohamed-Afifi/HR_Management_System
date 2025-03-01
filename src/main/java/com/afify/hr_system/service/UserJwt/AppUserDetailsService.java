@@ -5,6 +5,8 @@ import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.afify.hr_system.model.appUser.filter.UserSearchKeys;
+import com.afify.hr_system.model.appUser.filter.UserSpec;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -78,5 +80,10 @@ public class AppUserDetailsService {
 		tokenRepo.deleteByUserId(id);
 		userRepo.deleteById(id);
 		return ResponseEntity.ok(null);
+	}
+	public ResponseEntity<?> filter(UserSearchKeys userSearchKeys){
+		UserSpec userSpec=new UserSpec(userSearchKeys);
+		List<AppUser> appUsers=userRepo.findAll(userSpec);
+		return ResponseEntity.ok(appUsers.stream().map(userMapper::map).collect(Collectors.toList()));
 	}
 }

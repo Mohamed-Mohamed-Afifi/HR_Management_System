@@ -2,17 +2,10 @@ package com.afify.hr_system.controller.auth.user;
 
 import java.security.Principal;
 
+import com.afify.hr_system.model.appUser.filter.UserSearchKeys;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.afify.hr_system.mapper.user.UserDto;
 import com.afify.hr_system.service.UserJwt.AppUserDetailsService;
@@ -35,6 +28,10 @@ private final AppUserDetailsService appUserDetailsService;
 	@GetMapping("")
 	public ResponseEntity<?> getAllusers(@RequestParam("page_number") int pageNum,@RequestParam("page_size") int pageSize){
 		return ResponseEntity.ok(appUserDetailsService.getAllusers(pageNum,pageSize));
+	}	@PreAuthorize("hasAuthority('admin:read')")
+	@PostMapping("/filter")
+	public ResponseEntity<?> filterusers(@RequestBody UserSearchKeys userSearchKeys){
+		return appUserDetailsService.filter(userSearchKeys);
 	}
 	@PreAuthorize("hasAuthority('user:update')")
 	@PutMapping("")
