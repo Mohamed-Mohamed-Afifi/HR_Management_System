@@ -1,29 +1,33 @@
+server:
+  port: 9090
+
 spring:
-  server:
-    port: 9090
-  jackson:
-    serialization:
-      FAIL_ON_EMPTY_BEANS: false
   application:
-    name: hr_system
+    name: orders-management-system
+
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=Final_SD;encrypt=true;trustServerCertificate=true
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    username: sa
-    password: mos123
+    url: jdbc:mysql://localhost:3306/Company_SD
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+
+    show-sql: true
+
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.SQLServer2012Dialect
+        dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
+
         jdbc:
           time_zone: UTC
-    show-sql: true
-  logging:
-    level:
-      org.hibernate.SQL: DEBUG
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
 
 my:
   app:
@@ -33,4 +37,4 @@ my:
 application:
   security:
     jwt:
-      secret-key: "6L9bZzFI6b93aYd6R3qL2tpUSfJHEJ16NpQ92Bwl6yU="
+      secret-key: 6L9bZzFI6b93aYd6R3qL2tpUSfJHEJ16NpQ92Bwl6yU=
