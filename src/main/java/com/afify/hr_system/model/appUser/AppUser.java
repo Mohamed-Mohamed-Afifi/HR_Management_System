@@ -59,7 +59,7 @@ public class AppUser extends AudtingEntity implements UserDetails{
 	@JsonBackReference
 	private Set<Token> tokens;
 	@Lob
-	@Column(columnDefinition = "VARBINARY(MAX)")
+	@Column(name = "image")
 	private byte[] image;
 
 	@Override
